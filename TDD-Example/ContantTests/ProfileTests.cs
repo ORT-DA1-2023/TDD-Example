@@ -14,11 +14,12 @@ namespace ContactTests
         private const string SomeStreetAddress = "SomeStreet 1111";
         private const string PicturePathSample = @"Resources\test-image.jpg";
 
-
-        [TestMethod]
-        public void CreateProfileSuccessTest()
+        private Profile someProfile;
+        
+        [TestInitialize]
+        public void TestInit()
         {
-            var profile = new Profile()
+            someProfile = new Profile()
             {
                 FirstName = John,
                 LastName = Doe,
@@ -27,7 +28,24 @@ namespace ContactTests
                 StreetAddress = SomeStreetAddress,
                 PicturePath = PicturePathSample,
             };
+        }
 
+        [TestMethod]
+        public void CreateProfileSuccessTest()
+        {
+            // Arrange
+            var profile = new Profile()
+            {
+                //Act
+                FirstName = John,
+                LastName = Doe,
+                BirthDate = Oct7th1997,
+                PhoneNumber = PhoneNumberSample,
+                StreetAddress = SomeStreetAddress,
+                PicturePath = PicturePathSample,
+            };
+
+            // Assert
             Assert.IsNotNull(profile);
             Assert.AreEqual(profile.FirstName, John);
             Assert.AreEqual(profile.LastName, Doe);
@@ -35,7 +53,18 @@ namespace ContactTests
             Assert.AreEqual(profile.PhoneNumber, PhoneNumberSample);
             Assert.AreEqual(profile.StreetAddress, SomeStreetAddress);
             Assert.AreEqual(profile.PicturePath, PicturePathSample);
+        }
 
+        [TestMethod]
+        // Assert
+        [ExpectedException(typeof(BusinessLogicException, "Invalid first name: verylongfirstnamethatshouldnotworkherelikeseriouslywhohassuchalongname is too long")]
+        public void FirstNameTooLongTest()
+        {
+            // Arrange
+            var nameTooLong = "verylongfirstnamethatshouldnotworkherelikeseriouslywhohassuchalongname??";
+
+            // Act
+            someProfile.FirstName = nameTooLong;
         }
 
 
