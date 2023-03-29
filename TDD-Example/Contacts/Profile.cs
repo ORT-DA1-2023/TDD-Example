@@ -4,15 +4,16 @@ namespace Contacts
 {
     public class Profile
     {
+        private const int FirstNameMaxLenght = 30;
         private string firstName;
         public Profile()
         {
         }
 
         public string FirstName { get => firstName; set {
-                if(value.Length > 30)
+                if(value.Length > FirstNameMaxLenght)
                 {
-                    throw new BusinessLogicException("Invalid first name: verylongfirstnamethatshouldnotworkherelikeseriouslywhohassuchalongname is too long");
+                    throw new BusinessLogicException($"Invalid first name: {value} is too long");
                 }
                 firstName = value;
             } }
