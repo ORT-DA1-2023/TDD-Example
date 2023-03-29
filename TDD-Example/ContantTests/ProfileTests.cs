@@ -57,7 +57,7 @@ namespace ContactTests
 
         [TestMethod]
         // Assert
-        [ExpectedException(typeof(BusinessLogicException, "Invalid first name: verylongfirstnamethatshouldnotworkherelikeseriouslywhohassuchalongname is too long")]
+        [ExpectedException(typeof(BusinessLogicException), "Invalid first name: verylongfirstnamethatshouldnotworkherelikeseriouslywhohassuchalongname is too long")]
         public void FirstNameTooLongTest()
         {
             // Arrange
